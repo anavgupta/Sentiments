@@ -18,7 +18,7 @@ def main():
     positives = os.path.join(sys.path[0], "positive-words.txt")
     negatives = os.path.join(sys.path[0], "negative-words.txt")
 
-    # instantiate analyzernegatives
+    # instantiate analyzer
     analyzer = Analyzer(positives, negatives)
 
     # get the tweets of the user and analyze them
