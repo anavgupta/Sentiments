@@ -1,4 +1,7 @@
-import html
+# For Python 3.x use html and it's unescape method
+# For Python 2.x use HTMLParser and it's unescape method
+# import html
+from HTMLParser import HTMLParser
 import os
 import plotly
 import socket
@@ -59,10 +62,15 @@ def get_user_timeline(screen_name, count=200):
         if user[0]["protected"]:
             return None
         tweets = twitter.get_user_timeline(screen_name=screen_name, count=count)
-        return [html.unescape(tweet["text"].replace("\n", " ")) for tweet in tweets]
+
+        # if using Python 3.x
+        # return [html.unescape(tweet["text"].replace("\n", " ")) for tweet in tweets]
+
+        # If using python 2.x
+        return [HTMLParser().unescape(tweet["text"].replace("\n", " ")) for tweet in tweets]
     except TwythonAuthError:
-        raise RuntimeError("invalid API_KEY and/or API_SECRET") from None
+        raise RuntimeError("invalid API_KEY and/or API_SECRET")
     except TwythonRateLimitError:
-        raise RuntimeError("you've hit a rate limit") from None
+        raise RuntimeError("you've hit a rate limit")
     except TwythonError:
         return None

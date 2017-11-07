@@ -25,17 +25,19 @@ class Analyzer():
         self.negatives = load_words(negatives)
         # print self.positives
 
-
     # to analyze a text and calculate a score
     def analyze(self, text):
         """Analyze text for sentiment, returning its score."""
 
-        # TODO
+        # Uses the NLTK Tweet Tokenizer
         tokenizer = nltk.tokenize.TweetTokenizer()
         tokens = tokenizer.tokenize(text)
+
         # print tokens
         # print [str(x.lower()) for x in tokens]
 
+        # Categorize the text as positive, negative or neutral
+        # For the words with incorrect spellings it will give neutral ratings
         score = 0
         for word in tokens:
             if word.lower() in self.negatives:
